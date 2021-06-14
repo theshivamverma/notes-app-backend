@@ -20,7 +20,6 @@ const UserSchema = new Schema({
         required: "password is required"
     },
     notes: [ { type: Schema.Types.ObjectId, ref: "Note" } ],
-    pinned: [String],
     tags: [String]
 }, { timestamps: true })
 

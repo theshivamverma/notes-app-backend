@@ -34,72 +34,6 @@ function sendUser(req, res) {
   }
 }
 
-async function addNoteForUser(req, res) {
-  try {
-    const { noteId } = req.body;
-    const { user } = req;
-    user.notes.push(noteId);
-    let savedUser = await user.save();
-    res.status(200).json({ success: true, message: "Note added", savedUser });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "error adding note",
-      errorMessage: error.message,
-    });
-  }
-}
-
-async function removeNoteForUser(req, res) {
-  try {
-    const { noteId } = req.body;
-    const { user } = req;
-    user.notes.pull(noteId);
-    const savedUser = await user.save();
-    res.status(200).json({ success: true, message: "Note deleted", savedUser });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "error removing note",
-      errorMessage: error.message,
-    });
-  }
-}
-
-async function pinNote(req, res) {
-  try {
-    const { noteId } = req.body;
-    const { user } = req;
-    user.pinned.push(noteId);
-    const savedUser = await user.save();
-    res.status(200).json({ success: true, message: "Note pinned", savedUser });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "error pinning note",
-      errorMessage: error.message,
-    });
-  }
-}
-
-async function unpinNote(req, res) {
-  try {
-    const { noteId } = req.body;
-    const { user } = req;
-    user.pinned.pull(noteId);
-    const savedUser = await user.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Note unpinned", savedUser });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "error unpinning note",
-      errorMessage: error.message,
-    });
-  }
-}
-
 async function addTag(req, res) {
   try {
     const { tagName } = req.body;
@@ -135,10 +69,6 @@ async function removeTag(req, res) {
 module.exports = {
   getUserFromDB,
   sendUser,
-  addNoteForUser,
-  removeNoteForUser,
-  pinNote,
-  unpinNote,
   addTag,
   removeTag
 };

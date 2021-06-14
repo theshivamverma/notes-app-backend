@@ -19,6 +19,10 @@ const NoteSchema = new Schema({
     type: String,
     required: "bgColor is required",
   },
+  pinned: {
+    type: Boolean,
+    required: "pinned status is required" 
+  },
   userId: { type: Schema.Types.ObjectId, ref: "User" }
 }, { timestamps: true });
 
